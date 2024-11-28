@@ -6,11 +6,16 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('Second Stage') {
+        stages {
+        stage('Install Ansible') {
             steps {
-                echo "Second stage"
-            }
-        }
+                echo 'Updating system and installing Ansible...'
+                sh '''
+                    sudo apt update && sudo apt upgrade -y
+                    sudo apt install -y software-properties-common apt-transport-https wget
+                    sudo apt install -y ansible
+                    ansible --version
+                '''
         stage('Third Stage') {
             steps {
                 echo "Third stage"
