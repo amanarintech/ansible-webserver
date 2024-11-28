@@ -1,0 +1,7 @@
+- name: Add a link from index.html to vars.html
+  lineinfile:
+    path: "{{ file_path }}/index.html"
+    line: "<a href=vars.html>Ansible Variables Page</a>"
+    insertafter: EOF
+  ignore_errors: "{{ ansible_check_mode }}"
+
