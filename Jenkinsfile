@@ -22,7 +22,25 @@ pipeline {
             }
         }
 
-        // New stage added for running ansible-lint
+        // New stage added for downloading Ansible code
+        stage('Download Ansible Code') {
+            steps {
+                script {
+                    // Command to download the Ansible code
+                    echo "Downloading Ansible code..."
+                    // Add any specific command to download your Ansible playbooks or code here
+                    sh 'git clone https://github.com/your-repo/your-ansible-code.git $WORKSPACE/playbooks'
+                }
+            }
+        }
+
+        stage('Third Stage') {
+            steps {
+                echo "Third stage"  // Placeholder for additional tasks in the third stage
+            }
+        }
+
+        // Move the linting stage to the last position
         stage('Run ansible-lint against playbooks') {
             steps {
                 script {
@@ -31,12 +49,6 @@ pipeline {
                     sh 'docker run --rm -v $WORKSPACE/playbooks:/data cytopia/ansible-lint:4 website-update.yml'
                     sh 'docker run --rm -v $WORKSPACE/playbooks:/data cytopia/ansible-lint:4 website-test.yml'
                 }
-            }
-        }
-
-        stage('Third Stage') {
-            steps {
-                echo "Third stage"  // Placeholder for additional tasks in the third stage
             }
         }
     }
