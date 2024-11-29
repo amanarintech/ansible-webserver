@@ -1,7 +1,7 @@
 pipeline {
     agent { label "agentfarm" }
     stages {
-        stage('Delete the workspace') {
+        stage('Aman the workspace') {
             steps {
                 cleanWs()  // Clean up the workspace before proceeding
             }
