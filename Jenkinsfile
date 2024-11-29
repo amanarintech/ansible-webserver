@@ -22,9 +22,21 @@ pipeline {
             }
         }
 
+        // New stage added for running ansible-lint
+        stage('Run ansible-lint against playbooks') {
+            steps {
+                script {
+                    // Run ansible-lint using docker for each playbook
+                    sh 'docker run --rm -v $WORKSPACE/playbooks:/data cytopia/ansible-lint:4 apache-install.yml'
+                    sh 'docker run --rm -v $WORKSPACE/playbooks:/data cytopia/ansible-lint:4 website-update.yml'
+                    sh 'docker run --rm -v $WORKSPACE/playbooks:/data cytopia/ansible-lint:4 website-test.yml'
+                }
+            }
+        }
+
         stage('Third Stage') {
             steps {
-                git credentialsId: 'git-repo-creds', url: 'git@github.com:amanarintech/ansible-webserver.git'
+                echo "Third stage"  // Placeholder for additional tasks in the third stage
             }
         }
     }
