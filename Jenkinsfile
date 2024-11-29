@@ -33,11 +33,6 @@ pipeline {
             }
         }
 
-        stage('Third Stage') {
-            steps {
-                echo "Third stage"  // Placeholder for additional tasks in the third stage
-            }
-        }
 
         // Move the linting stage to the last position
         stage('Run ansible-lint against playbooks') {
