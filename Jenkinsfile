@@ -25,6 +25,7 @@ pipeline {
         stage('Third Stage') {
             steps {
                 echo "Third stage"  // Placeholder for additional tasks in the third stage
+                git credentialsId: 'git-repo-creds', url: 'git@github.com:amanarintech/ansible-webserver.git'
             }
         }
     }
