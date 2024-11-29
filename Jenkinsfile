@@ -27,9 +27,8 @@ pipeline {
             steps {
                 script {
                     // Command to download the Ansible code
-                    echo "Downloading Ansible code..."
-                    // Add any specific command to download your Ansible playbooks or code here
-                    sh 'git clone https://github.com/your-repo/your-ansible-code.git $WORKSPACE/playbooks'
+                    echo "Downloading Ansible code.."
+                    git credentialsId: 'git-repo-creds', url: 'git@github.com:amanarintech/ansible-webserver.git'
                 }
             }
         }
